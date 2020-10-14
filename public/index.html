@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/7.19.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <!-- <script defer src="/__/firebase/7.19.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.19.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.19.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.19.1/firebase-storage.js"></script> -->
+    <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+  <style>
+    html {
+      height: 100vh;
+    }
+    body {
+      padding-top: 60px;
+      padding-left: 100px;
+      padding-right: 100px;
+      padding-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .section {
+      height: 100%;
+    }
+    div {
+      display: inline-block;
+      vertical-align:auto;
+    }
+
+  </style>
+
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Firebase API Users with CRUDish Functions</h1>
+    <p>Enter Name and Email into the inputs fields below and press Create user. Click on a User to Delete them from the database.</p>
+  </div>
+</div>
+
+<section id="tableSection" class="section">
+<h1>User table</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody id="userTable"></tbody>
+</table>
+
+<div class="container">
+  <div class="row">
+    <div class="col input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Username</span>
+      </div>
+        <input type="text" id="userNameField" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="col input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Email</span>
+      </div>
+      <input type="text" id="userEmailField" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <button id="createUserButton" type="button" class="btn btn-primary">Create user</button>
+</div>
+</section>
+
+<section id="editSection" class="section" style="display: none">
+  <div>
+    <h1>Do you want to DELETE the user?</h1>
+    <br>
+    <button id="backButton" type="button" class="btn btn-primary" onclick="showTableSection();">Return</button>
+  </div>
+<!---
+  <div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </div>
+--->
+
+  <div>
+    <br>
+    <button type="button" id="deleteUserButton" class="btn btn-danger">Delete user</button>
+  </div>
+</section>
+
+<script async="false">
+      
+  document.addEventListener('DOMContentLoaded', function() {
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    // // The Firebase SDK is initialized and available here!
+    //
+    // firebase.auth().onAuthStateChanged(user => { });
+    // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+    // firebase.messaging().requestPermission().then(() => { });
+    // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });      
+    //
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+    try {
+      let app = firebase.app();
+      // let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+      // document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+    } catch (e) {
+      console.error(e);
+      document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+    }
+  });
+</script>
+<script defer src='index.js'></script>
+</body>
+</html>
